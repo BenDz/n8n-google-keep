@@ -1,17 +1,20 @@
 {
-  "name": "n8n-nodes-google-keep",
+  "name": "@b___d/n8n-nodes-google-keep",
   "version": "0.1.0",
   "description": "Google Keep nodes for n8n (create/list/get/delete + trigger)",
   "author": "you",
   "license": "MIT",
-  "keywords": ["n8n-community-node", "google-keep", "n8n"],
+  "keywords": [
+    "n8n-community-node",
+    "google-keep",
+    "n8n"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -w"
   },
-  "dependencies": {},
   "devDependencies": {
     "typescript": "^5.4.0"
   },
@@ -23,5 +26,13 @@
       "dist/nodes/GoogleKeep.node.js",
       "dist/nodes/GoogleKeepTrigger.node.js"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenDz/n8n-google-keep.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BenDz/n8n-google-keep/issues"
+  },
+  "homepage": "https://github.com/BenDz/n8n-google-keep#readme"
 }
