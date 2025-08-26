@@ -1,6 +1,6 @@
 {
   "name": "@b___d/n8n-nodes-google-keep",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Google Keep nodes for n8n (create/list/get/delete + trigger)",
   "author": "you",
   "license": "MIT",
@@ -31,6 +31,9 @@
     "nodes": [
       "dist/nodes/GoogleKeep.node.js",
       "dist/nodes/GoogleKeepTrigger.node.js"
+    ],
+    "credentials": [
+      "dist/credentials/GoogleKeepApi.credentials.js"
     ]
   },
   "repository": {
