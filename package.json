@@ -19,9 +19,6 @@
     "typescript": "^5.4.0"
   },
   "n8n": {
-    "credentials": [
-      "dist/credentials/GoogleKeepOAuth2Api.credentials.js"
-    ],
     "nodes": [
       "dist/nodes/GoogleKeep.node.js",
       "dist/nodes/GoogleKeepTrigger.node.js"

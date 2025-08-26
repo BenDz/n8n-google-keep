@@ -26,12 +26,12 @@ async function keepRequest(
 	} as IDataObject;
 
 	try {
-		// use the OAuth2 credential we defined
-		return await this.helpers.httpRequestWithAuthentication.call(
-			this,
-			'googleKeepOAuth2Api',
-			options,
-		);
+                // use n8n's generic Google OAuth2 credential
+                return await this.helpers.httpRequestWithAuthentication.call(
+                        this,
+                        'googleApi',
+                        options,
+                );
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error as IDataObject);
 	}
@@ -46,7 +46,7 @@ export class GoogleKeep implements INodeType {
 		version: 1,
 		description: 'Create, get, list and delete Google Keep notes',
 		defaults: { name: 'Google Keep' },
-		credentials: [{ name: 'googleKeepOAuth2Api', required: true }],
+                credentials: [{ name: 'googleApi', required: true }],
 		inputs: ['main'],
 		outputs: ['main'],
 		properties: [

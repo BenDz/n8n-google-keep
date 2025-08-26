@@ -26,11 +26,11 @@ async function keepRequest(
 	} as IDataObject;
 
 	try {
-		return await this.helpers.httpRequestWithAuthentication.call(
-			this,
-			'googleKeepOAuth2Api',
-			options,
-		);
+                return await this.helpers.httpRequestWithAuthentication.call(
+                        this,
+                        'googleApi',
+                        options,
+                );
 	} catch (error) {
 		throw new NodeApiError(this.getNode(), error as IDataObject);
 	}
@@ -45,7 +45,7 @@ export class GoogleKeepTrigger implements INodeType {
 		version: 1,
 		description: 'Triggers when a new Keep note is created (polling)',
 		defaults: { name: 'Google Keep Trigger' },
-		credentials: [{ name: 'googleKeepOAuth2Api', required: true }],
+                credentials: [{ name: 'googleApi', required: true }],
 		inputs: [],
 		outputs: ['main'],
 		polling: true,
