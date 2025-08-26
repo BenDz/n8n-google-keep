@@ -4,35 +4,38 @@ import type {
 	INodeTypeDescription,
 	ITriggerFunctions,
 	ITriggerResponse,
+	IHttpRequestOptions,
+	JsonObject,
+	IHttpRequestMethods,
 } from 'n8n-workflow';
-import { NodeApiError } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionType } from 'n8n-workflow';
 
 const BASE_URL = 'https://keep.googleapis.com/v1';
 
 // helper for auth’d requests
 async function keepRequest(
 	this: ITriggerFunctions,
-	method: string,
+	method: IHttpRequestMethods,
 	endpoint: string,
 	body: IDataObject = {},
 	qs: IDataObject = {},
 ) {
-	const options = {
+	const options: IHttpRequestOptions = {
 		method,
 		url: `${BASE_URL}${endpoint}`,
 		json: true,
 		body: Object.keys(body).length ? body : undefined,
 		qs: Object.keys(qs).length ? qs : undefined,
-	} as IDataObject;
+	};
 
 	try {
-		return await this.helpers.httpRequestWithAuthentication.call(
-			this,
-			'googleKeepOAuth2Api',
-			options,
-		);
+                return await this.helpers.httpRequestWithAuthentication.call(
+                        this,
+                        'googleApi',
+                        options,
+                );
 	} catch (error) {
-		throw new NodeApiError(this.getNode(), error as IDataObject);
+		throw new NodeApiError(this.getNode(), error as JsonObject);
 	}
 }
 
@@ -45,9 +48,9 @@ export class GoogleKeepTrigger implements INodeType {
 		version: 1,
 		description: 'Triggers when a new Keep note is created (polling)',
 		defaults: { name: 'Google Keep Trigger' },
-		credentials: [{ name: 'googleKeepOAuth2Api', required: true }],
+                credentials: [{ name: 'googleApi', required: true }],
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionType.Main],
 		polling: true,
 		properties: [
 			{
@@ -108,7 +111,7 @@ export class GoogleKeepTrigger implements INodeType {
 				const notes = res.notes ?? [];
 				if (notes.length) {
 					// Emit items
-					this.emit(notes.map((n) => ({ json: n })));
+					this.emit([notes.map((n) => ({ json: n }))]);
 					emitted += notes.length;
 				}
 				pageToken = res.nextPageToken;
