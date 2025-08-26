@@ -1,6 +1,6 @@
 {
   "name": "@b___d/n8n-nodes-google-keep",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Google Keep nodes for n8n (create/list/get/delete + trigger)",
   "author": "you",
   "license": "MIT",
